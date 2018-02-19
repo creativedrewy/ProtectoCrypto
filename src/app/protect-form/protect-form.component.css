@@ -1,0 +1,8 @@
+.my-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-form > input {
+    width: 100%;
+}

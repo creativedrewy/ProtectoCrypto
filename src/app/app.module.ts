@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatButtonModule, MatToolbarModule } from '@angular/material'
+
+import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { ProtectFormComponent } from './protect-form/protect-form.component';
-
 
 @NgModule({
   declarations: [
@@ -13,10 +14,10 @@ import { ProtectFormComponent } from './protect-form/protect-form.component';
   ],
   imports: [
     BrowserModule,
-    MatButtonModule,
-    MatToolbarModule
+    BrowserAnimationsModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
