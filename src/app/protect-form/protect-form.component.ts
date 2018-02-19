@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProtectService } from '../service/protect.service';
 
 @Component({
   selector: 'app-protect-form',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./protect-form.component.css']
 })
 export class ProtectFormComponent implements OnInit {
+  formKey: String = ""
 
-  constructor() { }
+  constructor(private protectService: ProtectService) { }
 
   ngOnInit() {
+    this.formKey = this.protectService.doSomething()
   }
 
 }

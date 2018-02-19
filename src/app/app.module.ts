@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { ProtectFormComponent } from './protect-form/protect-form.component';
+import { ProtectService } from './service/protect.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { ProtectFormComponent } from './protect-form/protect-form.component';
     BrowserAnimationsModule,
     SharedModule
   ],
-  providers: [ ],
+  providers: [ProtectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
