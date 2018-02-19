@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule, MatToolbarModule } from '@angular/material'
 
 import { AppComponent } from './app.component';
+import { ProtectFormComponent } from './protect-form/protect-form.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProtectFormComponent
   ],
   imports: [
     BrowserModule,
