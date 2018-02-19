@@ -8,4 +8,10 @@
 
 @include mat-core();
 
+@import 'site-theme.scss';
+
 @import 'app/app.component.scss-theme';
+
+.theme {
+    @include angular-material-theme($site-theme);
+}

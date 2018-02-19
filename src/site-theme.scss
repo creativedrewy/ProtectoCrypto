@@ -1,0 +1,9 @@
+$site-theme-primary: mat-palette($mat-indigo);
+$site-theme-accent: mat-palette($mat-light-blue);
+$site-theme-warn: mat-palette($mat-deep-orange, A200);
+
+$site-theme: mat-light-theme(
+    $site-theme-primary,
+    $site-theme-accent,
+    $site-theme-warn
+);
