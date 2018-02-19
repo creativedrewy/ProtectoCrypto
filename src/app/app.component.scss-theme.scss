@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin anms-app-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    footer {
+        height: 150px;
+        background-color: mat-color($primary, darker)
+    }
+}
