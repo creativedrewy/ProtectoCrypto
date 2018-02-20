@@ -36,7 +36,7 @@ export class ProtectService {
 
   /**
    * Create the encrypt/decrypt engine based on the user's key
-   * @param key the key is sha-256'd for the encryption key and md5'd for the initialization vector
+   * @param key Is sha-256'd for the encryption key and md5'd for the initialization vector
    */
   private createEngine(key: string): Aes.ModeOfOperation {
     var hashResult = sha256.update(key)
