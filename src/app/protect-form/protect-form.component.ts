@@ -14,6 +14,10 @@ export class ProtectFormComponent implements OnInit {
   constructor(private protectService: ProtectService) { }
 
   ngOnInit() {
+    this.formResult = this.protectService.testValue;
+  }
+
+  encryptData() {
     
   }
 

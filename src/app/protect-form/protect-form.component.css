@@ -6,3 +6,8 @@
 .my-form > input {
     width: 100%;
 }
+
+.protect-buttons-container {
+    margin-top: 10px;
+    margin-bottom: 30px;
+}

@@ -10,6 +10,11 @@
           <mat-form-field class="my-form">
             <textarea matInput placeholder="Text to encrypt/decrypt"  value="{{ formText }}"></textarea>
           </mat-form-field>
+
+          <div class="protect-buttons-container">
+            <button mat-raised-button color="primary" (click)="encryptData()">Encrypt</button>
+            <button mat-raised-button color="primary">Decrypt</button>
+          </div>
         
           <mat-form-field class="my-form">
             <textarea matInput placeholder="Result" value="{{ formResult }}"></textarea>
