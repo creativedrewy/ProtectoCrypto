@@ -7,7 +7,7 @@ import { ProtectService } from '../service/protect.service';
   styleUrls: ['./protect-form.component.css']
 })
 export class ProtectFormComponent implements OnInit {
-  formKey: string = "This is the key that we will verify"
+  formKey: string = ""
   formText: string = ""
   formResult: string = ""
 

@@ -4,11 +4,11 @@
       <mat-tab-group>
         <mat-tab label="Protect">
           <mat-form-field class="my-form">
-            <input matInput placeholder="Key" value="{{ formKey }}">
+            <input matInput placeholder="Key" [(ngModel)]="formKey">
           </mat-form-field>
         
           <mat-form-field class="my-form">
-            <textarea matInput placeholder="Text to encrypt/decrypt"  value="{{ formText }}"></textarea>
+            <textarea matInput placeholder="Text to encrypt/decrypt" [(ngModel)]="formText"></textarea>
           </mat-form-field>
 
           <div class="protect-buttons-container">
@@ -17,7 +17,7 @@
           </div>
         
           <mat-form-field class="my-form">
-            <textarea matInput placeholder="Result" value="{{ formResult }}"></textarea>
+            <textarea matInput placeholder="Result" [(ngModel)]="formResult"></textarea>
           </mat-form-field>
         </mat-tab>
         <mat-tab label="About">

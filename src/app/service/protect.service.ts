@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Aes from 'aes-js';
+import * as Hash from 'object-hash';
 
 @Injectable()
 export class ProtectService {
@@ -19,6 +20,10 @@ export class ProtectService {
   }
 
   encryptText(key: string, text: string): string {
+    console.log("Here is your key: ", key);
+
+    var blah = Hash(key, { algorithm: "md5", encoding: "buffer" })
+    console.log("here it is", blah);
 
     return "hi";
   }
