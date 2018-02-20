@@ -8,11 +8,13 @@ import { ProtectService } from '../service/protect.service';
 })
 export class ProtectFormComponent implements OnInit {
   formKey: String = ""
+  formText: String = ""
+  formResult: String = ""
 
   constructor(private protectService: ProtectService) { }
 
   ngOnInit() {
-    this.formKey = this.protectService.doSomething()
+    
   }
 
 }

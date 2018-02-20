@@ -4,8 +4,5 @@ import { Injectable } from '@angular/core';
 export class ProtectService {
 
   constructor() { }
-
-  public doSomething(): String {
-    return "The first field is for the key"
-  }
+  
 }

@@ -2,24 +2,22 @@
   <div class="row justify-content-md-center">
     <div class="col-md-8">
       <mat-tab-group>
-        <mat-tab label="Encrypt/Decrypt!">
-          <h2>Stuff to put:</h2>
-      
+        <mat-tab label="Protect">
           <mat-form-field class="my-form">
             <input matInput placeholder="Key" value="{{ formKey }}">
           </mat-form-field>
         
           <mat-form-field class="my-form">
-            <textarea matInput placeholder="Textarea"></textarea>
+            <textarea matInput placeholder="Text to encrypt/decrypt"  value="{{ formText }}"></textarea>
           </mat-form-field>
         
-          <mat-select placeholder="Select" class="my-form">
-            <mat-option value="option">Option</mat-option>
-          </mat-select>
+          <mat-form-field class="my-form">
+            <textarea matInput placeholder="Result" value="{{ formResult }}"></textarea>
+          </mat-form-field>
         </mat-tab>
         <mat-tab label="About">
-          <h1>About this thing</h1>
-          <p>This is the about tab</p>
+          <h1>About this app</h1>
+          <p>This is the about info</p>
         </mat-tab>
       </mat-tab-group>
     </div>
