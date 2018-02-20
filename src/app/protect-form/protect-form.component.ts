@@ -7,18 +7,16 @@ import { ProtectService } from '../service/protect.service';
   styleUrls: ['./protect-form.component.css']
 })
 export class ProtectFormComponent implements OnInit {
-  formKey: String = ""
-  formText: String = ""
-  formResult: String = ""
+  formKey: string = "This is the key that we will verify"
+  formText: string = ""
+  formResult: string = ""
 
   constructor(private protectService: ProtectService) { }
 
-  ngOnInit() {
-    this.formResult = this.protectService.testValue;
-  }
+  ngOnInit() { }
 
   encryptData() {
-    
+    this.formResult = this.protectService.encryptText(this.formKey, "");
   }
 
 }

@@ -3,7 +3,6 @@ import * as Aes from 'aes-js';
 
 @Injectable()
 export class ProtectService {
-  testValue;
 
   constructor() {
     var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
@@ -16,7 +15,12 @@ export class ProtectService {
     var aesOfb = new Aes.ModeOfOperation.ofb(key, iv);
     var encryptedBytes = aesOfb.encrypt(textBytes);
 
-    this.testValue = Aes.utils.hex.fromBytes(encryptedBytes);
+    //this.testValue = Aes.utils.hex.fromBytes(encryptedBytes);
+  }
+
+  encryptText(key: string, text: string): string {
+
+    return "hi";
   }
 
 }
