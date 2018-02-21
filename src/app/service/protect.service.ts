@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { sha256 } from 'js-sha256';
 import * as Aes from 'aes-js';
 import * as Hash from 'object-hash';
-import { sha256 } from 'js-sha256';
+import * as Base64 from 'base64-js';
 
 @Injectable()
 export class ProtectService {
@@ -17,7 +18,7 @@ export class ProtectService {
     var textBytes = Aes.utils.utf8.toBytes(text);
     var encryptedBytes = engine.encrypt(textBytes);
 
-    return Aes.utils.hex.fromBytes(encryptedBytes);
+    return Base64.fromByteArray(encryptedBytes);
   }
 
   /**
@@ -28,7 +29,7 @@ export class ProtectService {
   decryptText(userKey: string, text: string): string {
     var engine = this.createEngine(userKey);
 
-    var textBytes = Aes.utils.hex.toBytes(text);
+    var textBytes = Base64.toByteArray(text);
     var encryptedBytes = engine.decrypt(textBytes);
 
     return Aes.utils.utf8.fromBytes(encryptedBytes);
