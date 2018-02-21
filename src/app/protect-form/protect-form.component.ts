@@ -23,4 +23,15 @@ export class ProtectFormComponent implements OnInit {
     this.formResult = this.protectService.decryptText(this.formKey, this.formText);
   }
 
+  copyText(inputElement: HTMLElement) {
+    (document.getElementById(inputElement.id) as any).select()
+
+    try {
+      var copySuccess = document.execCommand('copy');
+      //TODO: Success snackbar/toast
+    } catch (err) {
+      //TODO: Display error snackbar/toast here
+    }
+  }
+
 }

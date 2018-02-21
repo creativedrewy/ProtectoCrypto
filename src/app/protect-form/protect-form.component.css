@@ -11,3 +11,11 @@
     margin-top: 10px;
     margin-bottom: 30px;
 }
+
+.copy-paste-row {
+    display: flow-root;
+}
+
+.material-icons {
+    float: right;
+}
