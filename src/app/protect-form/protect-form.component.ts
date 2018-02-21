@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProtectService } from '../service/protect.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-protect-form',
@@ -11,7 +12,8 @@ export class ProtectFormComponent implements OnInit {
   formText: string = ""
   formResult: string = ""
 
-  constructor(private protectService: ProtectService) { }
+  constructor(private protectService: ProtectService, 
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() { }
 
@@ -28,9 +30,13 @@ export class ProtectFormComponent implements OnInit {
 
     try {
       var copySuccess = document.execCommand('copy');
-      //TODO: Success snackbar/toast
+      if (copySuccess) {
+        this.snackBar.open("Contents copied to clipboard", "OK", { duration: 2000 });
+      } else {
+        throw new Error()
+      }
     } catch (err) {
-      //TODO: Display error snackbar/toast here
+      this.snackBar.open("Contents not copied to clipboard", "OK", { duration: 2000, panelClass: "snack-bar-color" });
     }
   }
 
