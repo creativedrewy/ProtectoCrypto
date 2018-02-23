@@ -7,3 +7,7 @@ $site-theme: mat-light-theme(
     $site-theme-accent,
     $site-theme-warn
 );
+
+.footer {
+    background-color: mat-color($site-theme-primary);
+}

@@ -1,0 +1,10 @@
+.footer {
+    font-size: 14pt;
+    color: white;
+    margin-top: 40px;
+    display: block;
+}
+
+.right-link > i {
+    font-size: 40pt;
+}

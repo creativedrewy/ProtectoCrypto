@@ -16,13 +16,17 @@
     @include angular-material-theme($site-theme);
 }
 
-.snack-bar-color {
-    button {
-        color: red !important;
-    }
+.mat-toolbar {
+    margin-bottom: 20px;
 }
 
 .mat-tab-label-content {
     font-size: 16pt;
     font-weight: bold;
+}
+
+.snack-bar-color {
+    button {
+        color: red !important;
+    }
 }
