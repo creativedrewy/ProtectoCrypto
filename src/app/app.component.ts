@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  creator: string = "{creative:drewy}"
+  creator: string = "{creative:drewy}";
+  sourceUrl: string = "https://github.com/creativedrewy/ProtectoCrypto";
+  myWebsite: string = "http://www.creativedrewy.com";
+  twitterUrl: string = "https://twitter.com/creativedrewy";
 }

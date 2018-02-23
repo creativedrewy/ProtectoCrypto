@@ -1,8 +1,8 @@
 .footer {
-    /* font-size: 14pt; */
-    color: white;
+    color: rgba(255, 255, 255, 0.7);
     margin-top: 40px;
     display: block;
+    padding: 10px;
 }
 
 .made-by-container {
@@ -11,11 +11,22 @@
     justify-content: center;
 }
 
-.right-link {
-    display: flex;
-    align-items: center;
+.footer ul {
+    margin-bottom: 0px;
+    list-style-type: none;
 }
 
-.right-link > i {
+.right-link {
+    line-height: 1.3;
+}
+
+.right-link > a {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.right-link i {
     font-size: 30pt;
+    margin-right: 8pt;
 }
