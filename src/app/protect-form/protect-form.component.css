@@ -1,6 +1,7 @@
 .form-field {
     display: flex;
     flex-direction: column;
+    margin-top: 12px;
 }
 
 .form-field > input {
