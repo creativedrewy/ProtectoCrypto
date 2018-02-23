@@ -1,9 +1,9 @@
-.my-form {
+.form-field {
     display: flex;
     flex-direction: column;
 }
 
-.my-form > input {
+.form-field > input {
     width: 100%;
 }
 

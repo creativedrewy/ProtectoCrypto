@@ -1,17 +1,19 @@
-<div class="container my-form">
+<div class="container">
   <div class="row justify-content-md-center">
     <div class="col-md-8">
       <mat-tab-group>
         <mat-tab label="Protect">
-          <mat-form-field class="my-form">
+          <mat-form-field class="form-field">
             <input matInput placeholder="Key" [(ngModel)]="formKey" #keyInput>
+            <i class="material-icons" (click)="clearText(keyInput)">clear</i>
             <i class="material-icons" (click)="copyText(keyInput)">content_copy</i>
           </mat-form-field>
         
-          <mat-form-field class="my-form">
+          <mat-form-field class="form-field">
             <textarea rows="5" matInput placeholder="Text to encrypt/decrypt" [(ngModel)]="formText" #textInput></textarea>
           </mat-form-field>
           <div class="copy-paste-row">
+              <i class="material-icons" (click)="clearText(textInput)">clear</i>
               <i class="material-icons" (click)="copyText(textInput)">content_copy</i>
           </div>
 
@@ -20,10 +22,11 @@
             <button mat-raised-button color="primary" (click)="decryptData()">Decrypt</button>
           </div>
         
-          <mat-form-field class="my-form">
+          <mat-form-field class="form-field">
             <textarea rows="5" matInput placeholder="Result" [(ngModel)]="formResult" #resultData></textarea>
           </mat-form-field>
           <div class="copy-paste-row">
+              <i class="material-icons" (click)="clearText(resultData)">clear</i>
               <i class="material-icons" (click)="copyText(resultData)">content_copy</i>
           </div>
         </mat-tab>

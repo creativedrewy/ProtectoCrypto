@@ -25,6 +25,11 @@ export class ProtectFormComponent implements OnInit {
     this.formResult = this.protectService.decryptText(this.formKey, this.formText);
   }
 
+  clearText(inputElement: HTMLElement) {
+    //This will work for all the input types
+    (inputElement as any).value = ""
+  }
+
   copyText(inputElement: HTMLElement) {
     (document.getElementById(inputElement.id) as any).select()
 
