@@ -23,6 +23,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@angular/service-worker": "^5.2.6",
     "aes-js": "^3.1.0",
     "base64-js": "^1.2.3",
     "bootstrap": "^4.0.0",
