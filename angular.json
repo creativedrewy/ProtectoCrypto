@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ProtectoCrypto2": {
+    "ProtectoCrypto": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ProtectoCrypto2",
+            "outputPath": "dist/ProtectoCrypto",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ProtectoCrypto2:build"
+            "browserTarget": "ProtectoCrypto:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ProtectoCrypto2:build:production"
+              "browserTarget": "ProtectoCrypto:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ProtectoCrypto2:build"
+            "browserTarget": "ProtectoCrypto:build"
           }
         },
         "test": {
@@ -110,15 +110,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ProtectoCrypto2:serve"
+            "devServerTarget": "ProtectoCrypto:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ProtectoCrypto2:serve:production"
+              "devServerTarget": "ProtectoCrypto:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "ProtectoCrypto2"
+  "defaultProject": "ProtectoCrypto"
 }
