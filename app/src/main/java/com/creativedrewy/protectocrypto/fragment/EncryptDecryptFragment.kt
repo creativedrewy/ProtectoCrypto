@@ -10,6 +10,7 @@ import com.creativedrewy.protectocrypto.R
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModel
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.encrypt_decrypt_fragment.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +33,10 @@ class EncryptDecryptFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EncryptDecryptViewModel::class.java)
+
+        encrypt_button.setOnClickListener {
+
+        }
     }
 
 }
