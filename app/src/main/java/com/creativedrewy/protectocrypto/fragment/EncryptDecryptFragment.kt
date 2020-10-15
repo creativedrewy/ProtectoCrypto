@@ -13,20 +13,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class EncryptDecryptFragment : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: MainViewModelFactory
 
     companion object {
         fun newInstance() =
-            MainFragment()
+            EncryptDecryptFragment()
     }
 
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.encrypt_decrypt_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
