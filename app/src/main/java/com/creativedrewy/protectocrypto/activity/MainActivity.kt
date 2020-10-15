@@ -1,8 +1,9 @@
-package com.creativedrewy.protectocrypto
+package com.creativedrewy.protectocrypto.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.creativedrewy.protectocrypto.ui.main.MainFragment
+import com.creativedrewy.protectocrypto.R
+import com.creativedrewy.protectocrypto.fragment.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

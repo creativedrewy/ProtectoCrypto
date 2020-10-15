@@ -1,4 +1,4 @@
-package com.creativedrewy.protectocrypto.ui.main
+package com.creativedrewy.protectocrypto.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.creativedrewy.protectocrypto.R
+import com.creativedrewy.protectocrypto.viewmodel.MainViewModel
+import com.creativedrewy.protectocrypto.viewmodel.MainViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -17,7 +19,8 @@ class MainFragment : Fragment() {
     lateinit var viewModelFactory: MainViewModelFactory
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance() =
+            MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel

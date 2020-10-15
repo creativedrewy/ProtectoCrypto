@@ -1,4 +1,4 @@
-package com.creativedrewy.protectocrypto.ui.main
+package com.creativedrewy.protectocrypto.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
