@@ -7,23 +7,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.creativedrewy.protectocrypto.R
-import com.creativedrewy.protectocrypto.viewmodel.MainViewModel
-import com.creativedrewy.protectocrypto.viewmodel.MainViewModelFactory
+import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModel
+import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class EncryptDecryptFragment : Fragment() {
 
-    @Inject
-    lateinit var viewModelFactory: MainViewModelFactory
-
     companion object {
-        fun newInstance() =
-            EncryptDecryptFragment()
+        fun newInstance() = EncryptDecryptFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    @Inject
+    lateinit var viewModelFactory: EncryptDecryptViewModelFactory
+
+    private lateinit var viewModel: EncryptDecryptViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.encrypt_decrypt_fragment, container, false)
@@ -32,7 +31,7 @@ class EncryptDecryptFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(EncryptDecryptViewModel::class.java)
     }
 
 }
