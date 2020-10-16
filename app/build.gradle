@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.creativedrewy.protectocrypto"
-        minSdkVersion 24
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -40,6 +40,8 @@ android {
 dependencies {
     def lifecycle_version = "2.2.0"
     def nav_version = "2.3.1"
+
+    implementation project(":dataencryption")
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 

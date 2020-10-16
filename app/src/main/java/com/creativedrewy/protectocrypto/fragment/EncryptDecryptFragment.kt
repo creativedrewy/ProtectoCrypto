@@ -35,6 +35,10 @@ class EncryptDecryptFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(EncryptDecryptViewModel::class.java)
 
         encrypt_button.setOnClickListener {
+            viewModel.encodeData("key", "value")
+        }
+
+        decrypt_button.setOnClickListener {
 
         }
     }
