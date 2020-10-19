@@ -6,6 +6,7 @@ import javax.crypto.SecretKey
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 import javax.crypto.spec.SecretKeySpec
+import javax.inject.Inject
 
 /**
  * Derived From mkyong.com:
@@ -15,7 +16,15 @@ import javax.crypto.spec.SecretKeySpec
  *
  * MIT License: https://github.com/mkyong/core-java/blob/master/LICENSE
  */
-class CryptoUtils {
+class CryptoUtils @Inject constructor() {
+    companion object {
+        const val ENCRYPT_ALGO = "AES/GCM/NoPadding"
+
+        const val TAG_LENGTH_BIT = 128 // must be one of {128, 120, 112, 104, 96}
+        const val IV_LENGTH_BYTE = 12
+        const val SALT_LENGTH_BYTE = 16
+    }
+
     fun getRandomNonce(numBytes: Int): ByteArray {
         val nonce = ByteArray(numBytes)
         SecureRandom().nextBytes(nonce)

@@ -1,31 +1,67 @@
 package com.creativedrewy.dataencryption
 
-import java.security.MessageDigest
-import java.security.spec.AlgorithmParameterSpec
+import com.mkyong.crypto.encryptor.CryptoUtils
+import java.nio.ByteBuffer
 import java.util.*
 import javax.crypto.Cipher
-import javax.crypto.SecretKey
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.spec.SecretKeySpec
+import javax.crypto.spec.GCMParameterSpec
 import javax.inject.Inject
 
-class TextEncryptDecryptUseCase @Inject constructor() {
+/**
+ * Encryption/decryption methods derived from mkyong.com:
+ * https://mkyong.com/java/java-aes-encryption-and-decryption/
+ * and
+ * https://github.com/mkyong/core-java
+ *
+ * MIT License: https://github.com/mkyong/core-java/blob/master/LICENSE
+ */
+class TextEncryptDecryptUseCase @Inject constructor(
+    val cryptoUtils: CryptoUtils
+) {
 
-    fun encryptText(key: String, value: String): String {
-        val messageDigest = MessageDigest.getInstance("SHA-256")
+    fun encryptText(key: String, data: String): String {
+        val salt = cryptoUtils.getRandomNonce(CryptoUtils.SALT_LENGTH_BYTE)
+        val iv = cryptoUtils.getRandomNonce(CryptoUtils.IV_LENGTH_BYTE) // GCM recommended 12 bytes iv?
 
-        val keyBytes = key.toByteArray(Charsets.UTF_8)
-        val decodedKeyBytes = Base64.getDecoder().decode(keyBytes)
+        // secret key from password
+        val aesKeyFromPassword = cryptoUtils.getAESKeyFromPassword(key.toCharArray(), salt)
+        val cipher = Cipher.getInstance(CryptoUtils.ENCRYPT_ALGO)
 
-        val shaBytes = messageDigest.digest(decodedKeyBytes)
+        // ASE-GCM needs GCMParameterSpec
+        cipher.init(Cipher.ENCRYPT_MODE, aesKeyFromPassword, GCMParameterSpec(CryptoUtils.TAG_LENGTH_BIT, iv))
+        val cipherText = cipher.doFinal(data.toByteArray(Charsets.UTF_8))
 
-        val secretKey: SecretKey = SecretKeySpec(shaBytes, "AES")
-        val iv: AlgorithmParameterSpec = IvParameterSpec(shaBytes)
+        // prefix IV and Salt to cipher text
+        val cipherTextWithIvSalt = ByteBuffer.allocate(iv.size + salt.size + cipherText.size)
+                .put(iv)
+                .put(salt)
+                .put(cipherText)
+                .array()
 
-        val cipher: Cipher = Cipher.getInstance("AES")
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv)
-
-        return Base64.getEncoder().encodeToString(cipher.doFinal(value.toByteArray(Charsets.UTF_8)))
+        return Base64.getEncoder().encodeToString(cipherTextWithIvSalt)
     }
 
+    fun decryptText(key: String, data: String): String {
+        val decode = Base64.getDecoder().decode(data.toByteArray(Charsets.UTF_8))
+
+        // get back the iv and salt from the cipher text
+        val bb = ByteBuffer.wrap(decode)
+        val iv = ByteArray(CryptoUtils.IV_LENGTH_BYTE)
+        bb[iv]
+
+        val salt = ByteArray(CryptoUtils.SALT_LENGTH_BYTE)
+        bb[salt]
+
+        val cipherText = ByteArray(bb.remaining())
+        bb[cipherText]
+
+        // get back the aes key from the same password and salt
+        val aesKeyFromPassword = cryptoUtils.getAESKeyFromPassword(key.toCharArray(), salt)
+        val cipher = Cipher.getInstance(CryptoUtils.ENCRYPT_ALGO)
+
+        cipher.init(Cipher.DECRYPT_MODE, aesKeyFromPassword, GCMParameterSpec(CryptoUtils.TAG_LENGTH_BIT, iv))
+        val plainText = cipher.doFinal(cipherText)
+
+        return String(plainText, Charsets.UTF_8)
+    }
 }
