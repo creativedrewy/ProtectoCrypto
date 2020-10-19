@@ -13,11 +13,14 @@ class FullScreenAppActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.full_screen_activity)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, EncryptDecryptFragment.newInstance())
-                    .commitNow()
-        }
+        //if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                    .replace(R.id.container, EncryptDecryptFragment.newInstance())
+//                    .commitNow()
+
+            val fragment = EncryptDecryptFragment.newInstance()
+            fragment.show(supportFragmentManager, "ui")
+        //}
 
     }
 }
