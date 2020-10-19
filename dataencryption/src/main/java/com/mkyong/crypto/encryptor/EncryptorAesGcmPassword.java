@@ -26,17 +26,19 @@ public class EncryptorAesGcmPassword {
     private static final int SALT_LENGTH_BYTE = 16;
     private static final Charset UTF_8 = StandardCharsets.UTF_8;
 
+    private CryptoUtils cryptoUtils = new CryptoUtils();
+
     // return a base64 encoded AES encrypted text
-    public static String encrypt(byte[] pText, String password) throws Exception {
+    public String encrypt(byte[] pText, String password) throws Exception {
 
         // 16 bytes salt
-        byte[] salt = CryptoUtils.getRandomNonce(SALT_LENGTH_BYTE);
+        byte[] salt = cryptoUtils.getRandomNonce(SALT_LENGTH_BYTE);
 
         // GCM recommended 12 bytes iv?
-        byte[] iv = CryptoUtils.getRandomNonce(IV_LENGTH_BYTE);
+        byte[] iv = cryptoUtils.getRandomNonce(IV_LENGTH_BYTE);
 
         // secret key from password
-        SecretKey aesKeyFromPassword = CryptoUtils.getAESKeyFromPassword(password.toCharArray(), salt);
+        SecretKey aesKeyFromPassword = cryptoUtils.getAESKeyFromPassword(password.toCharArray(), salt);
 
         Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
 
@@ -54,11 +56,10 @@ public class EncryptorAesGcmPassword {
 
         // string representation, base64, send this string to other for decryption.
         return Base64.getEncoder().encodeToString(cipherTextWithIvSalt);
-
     }
 
     // we need the same password, salt and iv to decrypt it
-    private static String decrypt(String cText, String password) throws Exception {
+    public String decrypt(String cText, String password) throws Exception {
 
         byte[] decode = Base64.getDecoder().decode(cText.getBytes(UTF_8));
 
@@ -75,7 +76,7 @@ public class EncryptorAesGcmPassword {
         bb.get(cipherText);
 
         // get back the aes key from the same password and salt
-        SecretKey aesKeyFromPassword = CryptoUtils.getAESKeyFromPassword(password.toCharArray(), salt);
+        SecretKey aesKeyFromPassword = cryptoUtils.getAESKeyFromPassword(password.toCharArray(), salt);
 
         Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
 
@@ -84,33 +85,28 @@ public class EncryptorAesGcmPassword {
         byte[] plainText = cipher.doFinal(cipherText);
 
         return new String(plainText, UTF_8);
-
     }
 
-    public static void main(String[] args) throws Exception {
-
-        String OUTPUT_FORMAT = "%-30s:%s";
-        String PASSWORD = "this is a password";
-        String pText = "Hello world this is going to be encrypted";
-
-        String encryptedTextBase64 = EncryptorAesGcmPassword.encrypt(pText.getBytes(UTF_8), PASSWORD);
-
-        System.out.println("\n------ AES GCM Password-based Encryption ------");
-        System.out.println(String.format(OUTPUT_FORMAT, "Input (plain text)", pText));
-        System.out.println(String.format(OUTPUT_FORMAT, "Encrypted (base64) ", encryptedTextBase64));
-
-        System.out.println("\n------ AES GCM Password-based Decryption ------");
-        System.out.println(String.format(OUTPUT_FORMAT, "Input (base64)", encryptedTextBase64));
-
-        // if password not match.
-        // javax.crypto.AEADBadTagException: Tag mismatch!
-        //String decryptedText = EncryptorAesGcmPassword.decrypt(encryptedTextBase64, "other password");
-
-        String decryptedText = EncryptorAesGcmPassword.decrypt(encryptedTextBase64, PASSWORD);
-        System.out.println(String.format(OUTPUT_FORMAT, "Decrypted (plain text)", decryptedText));
-
-
-
-    }
-
+//    public static void main(String[] args) throws Exception {
+//
+//        String OUTPUT_FORMAT = "%-30s:%s";
+//        String PASSWORD = "this is a password";
+//        String pText = "Hello world this is going to be encrypted";
+//
+//        String encryptedTextBase64 = EncryptorAesGcmPassword.encrypt(pText.getBytes(UTF_8), PASSWORD);
+//
+//        System.out.println("\n------ AES GCM Password-based Encryption ------");
+//        System.out.println(String.format(OUTPUT_FORMAT, "Input (plain text)", pText));
+//        System.out.println(String.format(OUTPUT_FORMAT, "Encrypted (base64) ", encryptedTextBase64));
+//
+//        System.out.println("\n------ AES GCM Password-based Decryption ------");
+//        System.out.println(String.format(OUTPUT_FORMAT, "Input (base64)", encryptedTextBase64));
+//
+//        // if password not match.
+//        // javax.crypto.AEADBadTagException: Tag mismatch!
+//        //String decryptedText = EncryptorAesGcmPassword.decrypt(encryptedTextBase64, "other password");
+//
+//        String decryptedText = EncryptorAesGcmPassword.decrypt(encryptedTextBase64, PASSWORD);
+//        System.out.println(String.format(OUTPUT_FORMAT, "Decrypted (plain text)", decryptedText));
+//    }
 }
