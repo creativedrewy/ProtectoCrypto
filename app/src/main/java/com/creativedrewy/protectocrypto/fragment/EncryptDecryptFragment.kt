@@ -1,5 +1,6 @@
 package com.creativedrewy.protectocrypto.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -45,6 +46,15 @@ class EncryptDecryptFragment : BottomSheetDialogFragment() {
         decrypt_button.setOnClickListener {
             viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
         }
+
+        with (activity?.intent) {
+            if (this?.action == Intent.ACTION_SEND && type == "text/plain") {
+                this.getStringExtra(Intent.EXTRA_TEXT)?.let {
+
+                }
+            }
+        }
+
     }
 
 }
