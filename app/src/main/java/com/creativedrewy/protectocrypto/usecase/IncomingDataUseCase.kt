@@ -4,13 +4,13 @@ import android.content.Intent
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class FieldUpdate(
+data class FieldUpdate(
     val key: String = "",
     val data: String = ""
 )
 
 class IncomingDataUseCase @Inject constructor(
-    private val sharedPreferences: SharedPreferences
+    private val sharedPrefs: SharedPreferences
 ) {
 
     companion object {
@@ -23,24 +23,32 @@ class IncomingDataUseCase @Inject constructor(
      * the relevant data field it will be put in
      */
     fun processIntentForUpdate(intent: Intent): FieldUpdate {
+        var returnFields = FieldUpdate()
 
-//        var returnField: FieldUpdate = None()
-//
-//        with (intent) {
-//            if (action == Intent.ACTION_SEND && type == "text/plain") {
-//                getStringExtra(Intent.EXTRA_TEXT)?.let { incomingText ->
-//                    if (submitCounter == 0 || submitCounter % 2 == 0) {
-//                        returnField = Key(incomingText)
-//                    } else {
-//                        returnField = Data(incomingText)
-//                    }
-//
-//                    submitCounter++
-//                }
-//            }
-//        }
+        with (intent) {
+            if (action == Intent.ACTION_SEND && type == "text/plain") {
+                getStringExtra(Intent.EXTRA_TEXT)?.let { incomingText ->
+                    val storedKey = sharedPrefs.getString(INPUT_KEY_PREF, "")
+                    val storedData = sharedPrefs.getString(INPUT_DATA_PREF, "")
 
-        return FieldUpdate()
+                    when {
+                        storedKey == "" && storedData == "" -> {
+                            //sharedPrefs.edit { putString(INPUT_KEY_PREF, incomingText) }
+
+                        }
+                        storedKey != "" && storedData == "" -> {
+                            //sharedPrefs.edit { putString(INPUT_DATA_PREF_PREF, incomingText) }
+
+                        }
+                        storedKey != "" && storedData != "" -> {
+
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnFields
     }
 
 }
