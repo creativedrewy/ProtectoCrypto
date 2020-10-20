@@ -13,7 +13,8 @@
 
         <activity
             android:name=".activity.FullScreenAppActivity"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.ProtectoCrypto.TransparentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
