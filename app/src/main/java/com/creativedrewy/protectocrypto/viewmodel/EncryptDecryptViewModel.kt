@@ -5,36 +5,37 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.creativedrewy.dataencryption.TextEncryptDecryptUseCase
+import com.creativedrewy.protectocrypto.usecase.Data
+import com.creativedrewy.protectocrypto.usecase.IncomingDataUseCase
+import com.creativedrewy.protectocrypto.usecase.Key
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class EncryptDecryptViewModel @Inject constructor(
-    private val textEncryptionUseCase: TextEncryptDecryptUseCase
+    private val textEncryptionUseCase: TextEncryptDecryptUseCase,
+    private val incomingDataUseCase: IncomingDataUseCase
 ) : ViewModel() {
 
     val viewState: MutableLiveData<ViewState> by lazy {
         MutableLiveData<ViewState>(ViewState())
     }
 
+    /**
+     *
+     */
     fun handleIncomingData(intent: Intent) {
-        with (intent) {
-            if (action == Intent.ACTION_SEND && type == "text/plain") {
-                getStringExtra(Intent.EXTRA_TEXT)?.let { text ->
-                    when {
-                        viewState.value?.sourceKey?.isEmpty() == true -> {
-                            viewState.postValue(viewState.value?.copy(
-                                    sourceKey = text
-                            ))
-                        }
-                        viewState.value?.sourceData?.isEmpty() == true -> {
-                            viewState.postValue(viewState.value?.copy(
-                                    sourceData = text
-                            ))
-                        }
-                    }
-                }
+        when (val fieldToUpdate = incomingDataUseCase.processIntentForUpdate(intent)) {
+            is Key -> {
+                viewState.postValue(viewState.value?.copy(
+                        sourceKey = fieldToUpdate.value
+                ))
+            }
+            is Data -> {
+                viewState.postValue(viewState.value?.copy(
+                        sourceData = fieldToUpdate.value
+                ))
             }
         }
     }
