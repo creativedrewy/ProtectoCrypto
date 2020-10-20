@@ -22,7 +22,7 @@ class FullScreenAppActivity : AppCompatActivity() {
         window.setGravity(Gravity.BOTTOM)
 
         if (savedInstanceState == null) {
-            sheetFragment = EncryptDecryptFragment.newInstance()
+            sheetFragment = EncryptDecryptFragment.newInstance(intent)
             sheetFragment?.let {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.container, it)
@@ -35,7 +35,7 @@ class FullScreenAppActivity : AppCompatActivity() {
         super.onNewIntent(intent)
 
         intent?.let {
-            sheetFragment?.handleNewIntent(it)
+            sheetFragment?.handleNewIntent(intent)
         }
     }
 }

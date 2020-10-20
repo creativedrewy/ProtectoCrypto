@@ -19,7 +19,19 @@ import javax.inject.Inject
 class EncryptDecryptFragment : Fragment() {
 
     companion object {
-        fun newInstance() = EncryptDecryptFragment()
+        const val ORIGINATING_INTENT: String = "incomingIntent"
+
+        fun newInstance(intent: Intent? = null): EncryptDecryptFragment {
+            val fragment = EncryptDecryptFragment()
+
+            intent?.let {
+                val args = Bundle()
+                args.putParcelable(ORIGINATING_INTENT, it)
+                fragment.arguments = args
+            }
+
+            return fragment
+        }
     }
 
     @Inject
@@ -47,6 +59,10 @@ class EncryptDecryptFragment : Fragment() {
 
         decrypt_button.setOnClickListener {
             viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+        }
+
+        arguments?.getParcelable<Intent>(ORIGINATING_INTENT)?.let {
+            viewModel.handleIncomingData(it)
         }
     }
 
