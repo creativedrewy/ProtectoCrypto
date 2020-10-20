@@ -5,18 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.creativedrewy.protectocrypto.R
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModel
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModelFactory
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.encrypt_decrypt_fragment.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class EncryptDecryptFragment : BottomSheetDialogFragment() {
+class EncryptDecryptFragment : Fragment() {
 
     companion object {
         fun newInstance() = EncryptDecryptFragment()
