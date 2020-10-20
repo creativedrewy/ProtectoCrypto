@@ -1,6 +1,8 @@
 package com.creativedrewy.protectocrypto.usecase
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.res.Resources
 import javax.inject.Inject
 
 class FieldUpdate(
@@ -8,7 +10,10 @@ class FieldUpdate(
     val data: String = ""
 )
 
-class IncomingDataUseCase @Inject constructor() {
+class IncomingDataUseCase @Inject constructor(
+    private val resources: Resources,
+    private val sharedPreferences: SharedPreferences
+) {
 
     private var submitCounter: Int = 0
 
