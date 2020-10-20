@@ -1,5 +1,6 @@
 package com.creativedrewy.protectocrypto.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -38,6 +39,14 @@ class FullScreenAppActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         sheetFragment = null
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        intent?.let {
+            sheetFragment?.handleNewIntent(it)
+        }
     }
 
     private fun createAndRevealSheet() {

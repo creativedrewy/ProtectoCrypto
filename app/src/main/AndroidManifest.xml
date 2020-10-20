@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProtectoCrypto">
 
-        <activity android:name=".activity.FullScreenAppActivity">
+        <activity
+            android:name=".activity.FullScreenAppActivity"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

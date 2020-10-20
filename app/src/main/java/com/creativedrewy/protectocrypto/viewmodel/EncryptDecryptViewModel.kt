@@ -1,5 +1,6 @@
 package com.creativedrewy.protectocrypto.viewmodel
 
+import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +14,30 @@ class EncryptDecryptViewModel @Inject constructor(
     private val textEncryptionUseCase: TextEncryptDecryptUseCase
 ) : ViewModel() {
 
-    val viewState: MutableLiveData<ViewState> = MutableLiveData()
+    val viewState: MutableLiveData<ViewState> by lazy {
+        MutableLiveData<ViewState>(ViewState())
+    }
+
+    fun handleIncomingData(intent: Intent) {
+        with (intent) {
+            if (action == Intent.ACTION_SEND && type == "text/plain") {
+                getStringExtra(Intent.EXTRA_TEXT)?.let { text ->
+                    when {
+                        viewState.value?.sourceKey?.isEmpty() == true -> {
+                            viewState.postValue(viewState.value?.copy(
+                                    sourceKey = text
+                            ))
+                        }
+                        viewState.value?.sourceData?.isEmpty() == true -> {
+                            viewState.postValue(viewState.value?.copy(
+                                    sourceData = text
+                            ))
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fun encodeData(key: String, data: String) {
         viewModelScope.launch {
@@ -21,7 +45,9 @@ class EncryptDecryptViewModel @Inject constructor(
                 textEncryptionUseCase.encryptText(key, data)
             }
 
-            viewState.postValue(ViewState(result))
+            viewState.postValue(viewState.value?.copy(
+                    processingResult = result
+            ))
         }
     }
 
@@ -31,7 +57,9 @@ class EncryptDecryptViewModel @Inject constructor(
                 textEncryptionUseCase.decryptText(key, data)
             }
 
-            viewState.postValue(ViewState(result))
+            viewState.postValue(viewState.value?.copy(
+                    processingResult = result
+            ))
         }
     }
 }

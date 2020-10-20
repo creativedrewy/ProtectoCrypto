@@ -36,6 +36,8 @@ class EncryptDecryptFragment : BottomSheetDialogFragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EncryptDecryptViewModel::class.java)
         viewModel.viewState.observe(this, Observer {
+            key_input_textview.setText(it.sourceKey)
+            data_input_textview.setText(it.sourceData)
             operation_result_textview.setText(it.processingResult)
         })
 
@@ -46,15 +48,9 @@ class EncryptDecryptFragment : BottomSheetDialogFragment() {
         decrypt_button.setOnClickListener {
             viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
         }
-
-        with (activity?.intent) {
-            if (this?.action == Intent.ACTION_SEND && type == "text/plain") {
-                this.getStringExtra(Intent.EXTRA_TEXT)?.let {
-
-                }
-            }
-        }
-
     }
 
+    fun handleNewIntent(intent: Intent) {
+        viewModel.handleIncomingData(intent)
+    }
 }
