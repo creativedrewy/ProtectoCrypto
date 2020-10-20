@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.creativedrewy.dataencryption.TextEncryptDecryptUseCase
-import com.creativedrewy.protectocrypto.usecase.Data
 import com.creativedrewy.protectocrypto.usecase.IncomingDataUseCase
-import com.creativedrewy.protectocrypto.usecase.Key
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -26,18 +24,25 @@ class EncryptDecryptViewModel @Inject constructor(
      *
      */
     fun handleIncomingData(intent: Intent) {
-        when (val fieldToUpdate = incomingDataUseCase.processIntentForUpdate(intent)) {
-            is Key -> {
-                viewState.postValue(viewState.value?.copy(
-                        sourceKey = fieldToUpdate.value
-                ))
-            }
-            is Data -> {
-                viewState.postValue(viewState.value?.copy(
-                        sourceData = fieldToUpdate.value
-                ))
-            }
-        }
+        val fieldsUpdate = incomingDataUseCase.processIntentForUpdate(intent)
+
+        viewState.postValue(viewState.value?.copy(
+            sourceKey = fieldsUpdate.key,
+            sourceData = fieldsUpdate.data
+        ))
+
+//        when (val fieldToUpdate = incomingDataUseCase.processIntentForUpdate(intent)) {
+//            is Key -> {
+//                viewState.postValue(viewState.value?.copy(
+//                        sourceKey = fieldToUpdate.value
+//                ))
+//            }
+//            is Data -> {
+//                viewState.postValue(viewState.value?.copy(
+//                        sourceData = fieldToUpdate.value
+//                ))
+//            }
+//        }
     }
 
     fun encodeData(key: String, data: String) {

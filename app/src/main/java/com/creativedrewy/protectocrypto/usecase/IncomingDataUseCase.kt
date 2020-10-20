@@ -3,11 +3,10 @@ package com.creativedrewy.protectocrypto.usecase
 import android.content.Intent
 import javax.inject.Inject
 
-sealed class FieldUpdate(val value: String)
-
-class None: FieldUpdate("")
-class Key(keyValue: String) : FieldUpdate(keyValue)
-class Data(dataValue: String) : FieldUpdate(dataValue)
+class FieldUpdate(
+    val key: String = "",
+    val data: String = ""
+)
 
 class IncomingDataUseCase @Inject constructor() {
 
@@ -18,23 +17,23 @@ class IncomingDataUseCase @Inject constructor() {
      * the relevant data field it will be put in
      */
     fun processIntentForUpdate(intent: Intent): FieldUpdate {
-        var returnField: FieldUpdate = None()
+//        var returnField: FieldUpdate = None()
+//
+//        with (intent) {
+//            if (action == Intent.ACTION_SEND && type == "text/plain") {
+//                getStringExtra(Intent.EXTRA_TEXT)?.let { incomingText ->
+//                    if (submitCounter == 0 || submitCounter % 2 == 0) {
+//                        returnField = Key(incomingText)
+//                    } else {
+//                        returnField = Data(incomingText)
+//                    }
+//
+//                    submitCounter++
+//                }
+//            }
+//        }
 
-        with (intent) {
-            if (action == Intent.ACTION_SEND && type == "text/plain") {
-                getStringExtra(Intent.EXTRA_TEXT)?.let { incomingText ->
-                    if (submitCounter == 0 || submitCounter % 2 == 0) {
-                        returnField = Key(incomingText)
-                    } else {
-                        returnField = Data(incomingText)
-                    }
-
-                    submitCounter++
-                }
-            }
-        }
-
-        return returnField
+        return FieldUpdate()
     }
 
 }
