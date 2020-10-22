@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.creativedrewy.protectocrypto.R
+import com.creativedrewy.protectocrypto.viewmodel.DataProcessed
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModel
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,9 +49,16 @@ class EncryptDecryptFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EncryptDecryptViewModel::class.java)
         viewModel.viewState.observe(this, Observer {
-            key_input_textview.setText(it.sourceKey)
-            data_input_textview.setText(it.sourceData)
-            operation_result_textview.setText(it.processingResult)
+            when (it) {
+                is DataProcessed -> {
+                    key_input_textview.setText(it.sourceKey)
+                    data_input_textview.setText(it.sourceData)
+                    operation_result_textview.setText(it.processingResult)
+                }
+                is Error -> {
+
+                }
+            }
         })
 
         encrypt_button.setOnClickListener {

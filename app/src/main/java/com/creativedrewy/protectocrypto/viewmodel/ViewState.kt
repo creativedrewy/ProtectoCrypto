@@ -1,7 +1,11 @@
 package com.creativedrewy.protectocrypto.viewmodel
 
-data class ViewState(
+sealed class ViewState
+
+data class DataProcessed(
     val sourceKey: String = "",
     val sourceData: String = "",
     val processingResult: String = ""
-)
+) : ViewState()
+
+class Error: ViewState()

@@ -17,7 +17,7 @@ class EncryptDecryptViewModel @Inject constructor(
 ) : ViewModel() {
 
     val viewState: MutableLiveData<ViewState> by lazy {
-        MutableLiveData<ViewState>(ViewState())
+        MutableLiveData<ViewState>(DataProcessed())
     }
 
     /**
@@ -26,7 +26,7 @@ class EncryptDecryptViewModel @Inject constructor(
     fun handleIncomingData(intent: Intent) {
         val fieldsUpdate = incomingDataUseCase.processIntentForUpdate(intent)
 
-        viewState.postValue(viewState.value?.copy(
+        viewState.postValue(DataProcessed(
             sourceKey = fieldsUpdate.key,
             sourceData = fieldsUpdate.data
         ))
@@ -38,7 +38,7 @@ class EncryptDecryptViewModel @Inject constructor(
                 textEncryptionUseCase.encryptText(key, data)
             }
 
-            viewState.postValue(viewState.value?.copy(
+            viewState.postValue((viewState.value as? DataProcessed)?.copy(
                     processingResult = result
             ))
         }
@@ -50,14 +50,14 @@ class EncryptDecryptViewModel @Inject constructor(
                 textEncryptionUseCase.decryptText(key, data)
             }
 
-            viewState.postValue(viewState.value?.copy(
+            viewState.postValue((viewState.value as? DataProcessed)?.copy(
                     processingResult = result
             ))
         }
     }
 
     fun clearCacheIfNeeded() {
-        viewState.value?.let {
+        (viewState.value as? DataProcessed)?.let {
             if (it.sourceData.isNotEmpty() &&
                 it.sourceKey.isNotEmpty() &&
                 it.processingResult.isNotEmpty()) {
