@@ -39,7 +39,7 @@ class EncryptDecryptViewModel @Inject constructor(
                     textEncryptionUseCase.encryptText(key, data)
                 }
 
-                updateProcessingResult(key, data, result)
+                viewState.postValue(DataProcessed(key, data, result))
             } catch (e: Exception) {
                 viewState.postValue(ErrorState("Error encrypting your data"))
             }
@@ -53,27 +53,11 @@ class EncryptDecryptViewModel @Inject constructor(
                     textEncryptionUseCase.decryptText(key, data)
                 }
 
-                updateProcessingResult(key, data, result)
+                viewState.postValue(DataProcessed(key, data, result))
             } catch (e: Exception) {
                 viewState.postValue(ErrorState("Error decrypting your data"))
             }
         }
-    }
-
-    private fun updateProcessingResult(key: String, data: String, processResult: String) {
-        val postMe = when (viewState.value) {
-            is DataProcessed -> {
-                (viewState.value as? DataProcessed)?.copy(
-                    processingResult = processResult
-                )
-            }
-            is ErrorState -> {
-                DataProcessed(key, data, processResult)
-            }
-            else -> { DataProcessed() }
-        }
-
-        viewState.postValue(postMe)
     }
 
     fun clearCacheIfNeeded() {
