@@ -12,6 +12,8 @@ import com.creativedrewy.protectocrypto.R
 import com.creativedrewy.protectocrypto.viewmodel.DataProcessed
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModel
 import com.creativedrewy.protectocrypto.viewmodel.EncryptDecryptViewModelFactory
+import com.creativedrewy.protectocrypto.viewmodel.ErrorState
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.encrypt_decrypt_fragment.*
 import javax.inject.Inject
@@ -48,15 +50,15 @@ class EncryptDecryptFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         viewModel = ViewModelProvider(this, viewModelFactory).get(EncryptDecryptViewModel::class.java)
-        viewModel.viewState.observe(this, Observer {
-            when (it) {
+        viewModel.viewState.observe(this, Observer { state ->
+            when (state) {
                 is DataProcessed -> {
-                    key_input_textview.setText(it.sourceKey)
-                    data_input_textview.setText(it.sourceData)
-                    operation_result_textview.setText(it.processingResult)
+                    key_input_textview.setText(state.sourceKey)
+                    data_input_textview.setText(state.sourceData)
+                    operation_result_textview.setText(state.processingResult)
                 }
-                is Error -> {
-
+                is ErrorState -> {
+                    Snackbar.make(main, state.message, Snackbar.LENGTH_SHORT).show()
                 }
             }
         })

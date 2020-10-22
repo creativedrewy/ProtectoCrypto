@@ -8,4 +8,6 @@ data class DataProcessed(
     val processingResult: String = ""
 ) : ViewState()
 
-class Error: ViewState()
+data class ErrorState(
+    val message: String = ""
+): ViewState()

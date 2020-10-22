@@ -34,26 +34,46 @@ class EncryptDecryptViewModel @Inject constructor(
 
     fun encodeData(key: String, data: String) {
         viewModelScope.launch {
-            val result = withContext(Dispatchers.Default) {
-                textEncryptionUseCase.encryptText(key, data)
-            }
+            try {
+                val result = withContext(Dispatchers.Default) {
+                    textEncryptionUseCase.encryptText(key, data)
+                }
 
-            viewState.postValue((viewState.value as? DataProcessed)?.copy(
-                    processingResult = result
-            ))
+                updateProcessingResult(key, data, result)
+            } catch (e: Exception) {
+                viewState.postValue(ErrorState("Error encrypting your data"))
+            }
         }
     }
 
     fun decodeData(key: String, data: String) {
         viewModelScope.launch {
-            val result = withContext(Dispatchers.Default) {
-                textEncryptionUseCase.decryptText(key, data)
-            }
+            try {
+                val result = withContext(Dispatchers.Default) {
+                    textEncryptionUseCase.decryptText(key, data)
+                }
 
-            viewState.postValue((viewState.value as? DataProcessed)?.copy(
-                    processingResult = result
-            ))
+                updateProcessingResult(key, data, result)
+            } catch (e: Exception) {
+                viewState.postValue(ErrorState("Error decrypting your data"))
+            }
         }
+    }
+
+    private fun updateProcessingResult(key: String, data: String, processResult: String) {
+        val postMe = when (viewState.value) {
+            is DataProcessed -> {
+                (viewState.value as? DataProcessed)?.copy(
+                    processingResult = processResult
+                )
+            }
+            is ErrorState -> {
+                DataProcessed(key, data, processResult)
+            }
+            else -> { DataProcessed() }
+        }
+
+        viewState.postValue(postMe)
     }
 
     fun clearCacheIfNeeded() {
