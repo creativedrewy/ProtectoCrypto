@@ -44,4 +44,7 @@ class IncomingDataUseCase @Inject constructor(
         return returnFields
     }
 
+    fun clearCachedKey() {
+        sharedPrefs.edit { putString(INPUT_KEY_PREF, "") }
+    }
 }

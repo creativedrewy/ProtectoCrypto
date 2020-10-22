@@ -66,6 +66,12 @@ class EncryptDecryptFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        viewModel.clearCacheIfNeeded()
+    }
+
     fun handleNewIntent(intent: Intent) {
         viewModel.handleIncomingData(intent)
     }

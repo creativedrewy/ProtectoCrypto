@@ -55,4 +55,15 @@ class EncryptDecryptViewModel @Inject constructor(
             ))
         }
     }
+
+    fun clearCacheIfNeeded() {
+        viewState.value?.let {
+            if (it.sourceData.isNotEmpty() &&
+                it.sourceKey.isNotEmpty() &&
+                it.processingResult.isNotEmpty()) {
+
+                incomingDataUseCase.clearCachedKey()
+            }
+        }
+    }
 }
