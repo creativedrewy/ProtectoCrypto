@@ -70,4 +70,13 @@ class EncryptDecryptViewModel @Inject constructor(
             }
         }
     }
+
+    /**
+     * TODO: Look into clearing the clipboard as well
+     */
+    fun clearEverything() {
+        incomingDataUseCase.clearCachedKey()
+
+        viewState.postValue(DataProcessed())
+    }
 }

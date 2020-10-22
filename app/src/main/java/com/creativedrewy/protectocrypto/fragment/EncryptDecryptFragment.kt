@@ -71,6 +71,10 @@ class EncryptDecryptFragment : Fragment() {
             viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
         }
 
+        clear_everything_button.setOnClickListener {
+            viewModel.clearEverything()
+        }
+
         arguments?.getParcelable<Intent>(ORIGINATING_INTENT)?.let {
             viewModel.handleIncomingData(it)
         }
