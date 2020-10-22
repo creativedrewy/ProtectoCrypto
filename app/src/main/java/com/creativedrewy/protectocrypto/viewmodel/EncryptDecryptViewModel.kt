@@ -30,19 +30,6 @@ class EncryptDecryptViewModel @Inject constructor(
             sourceKey = fieldsUpdate.key,
             sourceData = fieldsUpdate.data
         ))
-
-//        when (val fieldToUpdate = incomingDataUseCase.processIntentForUpdate(intent)) {
-//            is Key -> {
-//                viewState.postValue(viewState.value?.copy(
-//                        sourceKey = fieldToUpdate.value
-//                ))
-//            }
-//            is Data -> {
-//                viewState.postValue(viewState.value?.copy(
-//                        sourceData = fieldToUpdate.value
-//                ))
-//            }
-//        }
     }
 
     fun encodeData(key: String, data: String) {

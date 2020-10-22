@@ -2,6 +2,7 @@ package com.creativedrewy.protectocrypto.usecase
 
 import android.content.Intent
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import javax.inject.Inject
 
 data class FieldUpdate(
@@ -15,7 +16,6 @@ class IncomingDataUseCase @Inject constructor(
 
     companion object {
         const val INPUT_KEY_PREF = "inputKeyPref"
-        const val INPUT_DATA_PREF = "inputDataPref"
     }
 
     /**
@@ -29,20 +29,13 @@ class IncomingDataUseCase @Inject constructor(
             if (action == Intent.ACTION_SEND && type == "text/plain") {
                 getStringExtra(Intent.EXTRA_TEXT)?.let { incomingText ->
                     val storedKey = sharedPrefs.getString(INPUT_KEY_PREF, "")
-                    val storedData = sharedPrefs.getString(INPUT_DATA_PREF, "")
 
-                    when {
-                        storedKey == "" && storedData == "" -> {
-                            //sharedPrefs.edit { putString(INPUT_KEY_PREF, incomingText) }
+                    if (storedKey.isNullOrEmpty()) {
+                        sharedPrefs.edit { putString(INPUT_KEY_PREF, incomingText) }
 
-                        }
-                        storedKey != "" && storedData == "" -> {
-                            //sharedPrefs.edit { putString(INPUT_DATA_PREF_PREF, incomingText) }
-
-                        }
-                        storedKey != "" && storedData != "" -> {
-
-                        }
+                        returnFields = FieldUpdate(incomingText)
+                    } else {
+                        returnFields = FieldUpdate(storedKey, incomingText)
                     }
                 }
             }
