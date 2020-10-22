@@ -64,11 +64,15 @@ class EncryptDecryptFragment : Fragment() {
         })
 
         encrypt_button.setOnClickListener {
-            viewModel.encodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+            validateForm {
+                viewModel.encodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+            }
         }
 
         decrypt_button.setOnClickListener {
-            viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+            validateForm {
+                viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+            }
         }
 
         clear_everything_button.setOnClickListener {
@@ -88,5 +92,11 @@ class EncryptDecryptFragment : Fragment() {
 
     fun handleNewIntent(intent: Intent) {
         viewModel.handleIncomingData(intent)
+    }
+
+    private fun validateForm(onValidated: () -> Unit) {
+        if (key_input_textview.text.isNotEmpty() && data_input_textview.text.isNotEmpty()) {
+            onValidated()
+        }
     }
 }
