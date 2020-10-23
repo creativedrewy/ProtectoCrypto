@@ -1,125 +1,133 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".activity.FullScreenAppActivity">
 
-    <TextView
-        android:id="@+id/key_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Key"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
-    <EditText
-        android:id="@+id/key_input_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="8"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/key_textview"
-        app:layout_constraintTop_toBottomOf="@+id/key_textview" />
+        <TextView
+            android:id="@+id/key_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Key"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/data_title_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Text to Encrypt/Decrypt"
-        app:layout_constraintStart_toStartOf="@+id/key_input_textview"
-        app:layout_constraintTop_toBottomOf="@+id/key_input_textview" />
+        <EditText
+            android:id="@+id/key_input_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="8"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/key_textview"
+            app:layout_constraintTop_toBottomOf="@+id/key_textview" />
 
-    <EditText
-        android:id="@+id/data_input_textview"
-        style="@android:style/Widget.Material.EditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/data_title_textview"
-        app:layout_constraintTop_toBottomOf="@+id/data_title_textview" />
+        <TextView
+            android:id="@+id/data_title_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Text to Encrypt/Decrypt"
+            app:layout_constraintStart_toStartOf="@+id/key_input_textview"
+            app:layout_constraintTop_toBottomOf="@+id/key_input_textview" />
 
-    <Button
-        android:id="@+id/encrypt_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="Encrypt"
-        app:layout_constraintEnd_toStartOf="@+id/decrypt_button"
-        app:layout_constraintTop_toTopOf="@+id/decrypt_button" />
+        <EditText
+            android:id="@+id/data_input_textview"
+            style="@android:style/Widget.Material.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/data_title_textview"
+            app:layout_constraintTop_toBottomOf="@+id/data_title_textview" />
 
-    <Button
-        android:id="@+id/decrypt_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Decrypt"
-        app:layout_constraintEnd_toEndOf="@+id/data_input_textview"
-        app:layout_constraintTop_toBottomOf="@+id/data_input_textview" />
+        <Button
+            android:id="@+id/encrypt_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Encrypt"
+            app:layout_constraintEnd_toStartOf="@+id/decrypt_button"
+            app:layout_constraintTop_toTopOf="@+id/decrypt_button" />
 
-    <TextView
-        android:id="@+id/result_title_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Result"
-        app:layout_constraintStart_toStartOf="@+id/data_input_textview"
-        app:layout_constraintTop_toBottomOf="@+id/encrypt_button" />
+        <Button
+            android:id="@+id/decrypt_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Decrypt"
+            app:layout_constraintEnd_toEndOf="@+id/data_input_textview"
+            app:layout_constraintTop_toBottomOf="@+id/data_input_textview" />
 
-    <EditText
-        android:id="@+id/operation_result_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/result_title_textview"
-        app:layout_constraintTop_toBottomOf="@+id/result_title_textview" />
+        <TextView
+            android:id="@+id/result_title_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Result"
+            app:layout_constraintStart_toStartOf="@+id/data_input_textview"
+            app:layout_constraintTop_toBottomOf="@+id/encrypt_button" />
 
-    <Button
-        android:id="@+id/clear_everything_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Clear all data"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/operation_result_textview" />
+        <EditText
+            android:id="@+id/operation_result_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/result_title_textview"
+            app:layout_constraintTop_toBottomOf="@+id/result_title_textview" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="?attr/textInputStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clear_everything_button">
+        <Button
+            android:id="@+id/clear_everything_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Clear all data"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operation_result_textview" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clear_everything_button">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
