@@ -77,7 +77,8 @@ class EncryptDecryptFragment : Fragment() {
 
         operation_result_textview.setEndIconOnClickListener {
             if (operation_result_textview.editText?.text?.isNotEmpty() == true) {
-
+                viewModel.copyResultToClipboard(operation_result_textview.editText?.text?.toString() ?: "")
+                Snackbar.make(main, "Copied result to clipboard", Snackbar.LENGTH_SHORT).show()
             }
         }
 

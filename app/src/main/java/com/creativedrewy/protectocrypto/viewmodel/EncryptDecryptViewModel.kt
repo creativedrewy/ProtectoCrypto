@@ -1,5 +1,7 @@
 package com.creativedrewy.protectocrypto.viewmodel
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 class EncryptDecryptViewModel @Inject constructor(
     private val textEncryptionUseCase: TextEncryptDecryptUseCase,
-    private val incomingDataUseCase: IncomingDataUseCase
+    private val incomingDataUseCase: IncomingDataUseCase,
+    private val clipboardManager: ClipboardManager
 ) : ViewModel() {
 
     val viewState: MutableLiveData<ViewState> by lazy {
@@ -58,6 +61,11 @@ class EncryptDecryptViewModel @Inject constructor(
                 viewState.postValue(ErrorState("Error decrypting your data"))
             }
         }
+    }
+
+    fun copyResultToClipboard(result: String) {
+        val clipData = ClipData.newPlainText("text", result)
+        clipboardManager.setPrimaryClip(clipData)
     }
 
     fun clearCacheIfNeeded() {

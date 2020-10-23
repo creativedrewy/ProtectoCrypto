@@ -17,7 +17,7 @@
         <View
             android:id="@+id/top_border_view"
             android:layout_width="0dp"
-            android:layout_height="85dp"
+            android:layout_height="88dp"
             android:background="@drawable/top_border_gradient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
