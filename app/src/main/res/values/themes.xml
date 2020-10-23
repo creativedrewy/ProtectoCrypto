@@ -27,6 +27,7 @@
     <style name="Theme.ProtectoCrypto.TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="boxBackgroundColor">#e3e3e3</item>
         <item name="hintEnabled">false</item>
         <item name="hintAnimationEnabled">false</item>
         <item name="shapeAppearanceOverlay">?attr/shapeAppearanceSmallComponent</item>
