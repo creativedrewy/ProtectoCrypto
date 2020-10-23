@@ -1,5 +1,7 @@
 package com.creativedrewy.protectocrypto.viewmodel
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +15,13 @@ import javax.inject.Inject
 
 class EncryptDecryptViewModel @Inject constructor(
     private val textEncryptionUseCase: TextEncryptDecryptUseCase,
-    private val incomingDataUseCase: IncomingDataUseCase
+    private val incomingDataUseCase: IncomingDataUseCase,
+    private val clipboardManager: ClipboardManager
 ) : ViewModel() {
+
+    companion object {
+        const val CLIP_LABEL = "ProtectoCrypto"
+    }
 
     val viewState: MutableLiveData<ViewState> by lazy {
         MutableLiveData<ViewState>(DataProcessed())
@@ -60,6 +67,11 @@ class EncryptDecryptViewModel @Inject constructor(
         }
     }
 
+    fun copyResultToClipboard(result: String) {
+        val clipData = ClipData.newPlainText(CLIP_LABEL, result)
+        clipboardManager.setPrimaryClip(clipData)
+    }
+
     fun clearCacheIfNeeded() {
         (viewState.value as? DataProcessed)?.let {
             if (it.sourceData.isNotEmpty() &&
@@ -72,10 +84,11 @@ class EncryptDecryptViewModel @Inject constructor(
     }
 
     /**
-     * TODO: Look into clearing the clipboard as well
+     * Clear the form, cached values and even anything we might have pasted into the clipboard
      */
     fun clearEverything() {
         incomingDataUseCase.clearCachedKey()
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, " "))
 
         viewState.postValue(DataProcessed())
     }

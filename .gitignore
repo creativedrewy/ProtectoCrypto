@@ -19,6 +19,7 @@
 *.sublime-workspace
 /.gradle
 local.properties
+/build
 
 # IDE - VSCode
 .vscode/*

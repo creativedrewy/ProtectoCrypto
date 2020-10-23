@@ -53,9 +53,9 @@ class EncryptDecryptFragment : Fragment() {
         viewModel.viewState.observe(this, Observer { state ->
             when (state) {
                 is DataProcessed -> {
-                    key_input_textview.setText(state.sourceKey)
-                    data_input_textview.setText(state.sourceData)
-                    operation_result_textview.setText(state.processingResult)
+                    key_input_textview.editText?.setText(state.sourceKey)
+                    data_input_textview.editText?.setText(state.sourceData)
+                    operation_result_textview.editText?.setText(state.processingResult)
                 }
                 is ErrorState -> {
                     Snackbar.make(main, state.message, Snackbar.LENGTH_SHORT).show()
@@ -65,13 +65,20 @@ class EncryptDecryptFragment : Fragment() {
 
         encrypt_button.setOnClickListener {
             validateForm {
-                viewModel.encodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+                viewModel.encodeData(key_input_textview.editText?.text.toString(), data_input_textview.editText?.text.toString())
             }
         }
 
         decrypt_button.setOnClickListener {
             validateForm {
-                viewModel.decodeData(key_input_textview.text.toString(), data_input_textview.text.toString())
+                viewModel.decodeData(key_input_textview.editText?.text.toString(), data_input_textview.editText?.text.toString())
+            }
+        }
+
+        operation_result_textview.setEndIconOnClickListener {
+            if (operation_result_textview.editText?.text?.isNotEmpty() == true) {
+                viewModel.copyResultToClipboard(operation_result_textview.editText?.text?.toString() ?: "")
+                Snackbar.make(main, "Copied result to clipboard", Snackbar.LENGTH_SHORT).show()
             }
         }
 
@@ -95,7 +102,8 @@ class EncryptDecryptFragment : Fragment() {
     }
 
     private fun validateForm(onValidated: () -> Unit) {
-        if (key_input_textview.text.isNotEmpty() && data_input_textview.text.isNotEmpty()) {
+        if (key_input_textview.editText?.text?.isNotEmpty() == true &&
+            data_input_textview.editText?.text?.isNotEmpty() == true) {
             onValidated()
         }
     }

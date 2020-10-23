@@ -1,5 +1,6 @@
 package com.creativedrewy.protectocrypto.injection
 
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
@@ -20,4 +21,9 @@ class ProtectoCryptoModule {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
+    @Provides
+    @Singleton
+    fun provideClipboardManager(@ApplicationContext context: Context): ClipboardManager {
+        return context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    }
 }

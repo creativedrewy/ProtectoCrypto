@@ -3,7 +3,7 @@
     <style name="Theme.ProtectoCrypto" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/protecto_primary</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
 
@@ -16,27 +16,56 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
         <!-- Customize your theme here. -->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.ProtectoCrypto.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.ProtectoCrypto.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.ProtectoCrypto.LargeComponent</item>
+        <item name="shapeAppearanceSmallComponent">@style/Theme.ProtectoCrypto.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/Theme.ProtectoCrypto.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/Theme.ProtectoCrypto.LargeComponent</item>
+
+        <item name="textInputStyle">@style/Theme.ProtectoCrypto.TextInput</item>
+        <item name="materialCardViewStyle">@style/Theme.ProtectoCrypto.CardView</item>
     </style>
 
-    <style name="ShapeAppearance.ProtectoCrypto.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">4dp</item>
+    <style name="Theme.ProtectoCrypto.TextInput" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="boxBackgroundColor">#e3e3e3</item>
+        <item name="hintEnabled">false</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="shapeAppearanceOverlay">?attr/shapeAppearanceSmallComponent</item>
     </style>
 
-    <style name="ShapeAppearance.ProtectoCrypto.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <style name="Theme.ProtectoCrypto.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">?attr/shapeAppearanceLargeComponent</item>
+        <item name="paddingTopNoTitle">0dp</item>
+    </style>
+
+    <style name="Theme.ProtectoCrypto.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeBottomLeft">16dp</item>
+        <item name="cornerSizeBottomRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+    </style>
+
+    <style name="Theme.ProtectoCrypto.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="ShapeAppearance.ProtectoCrypto.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">24dp</item>
+    <style name="Theme.ProtectoCrypto.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeBottomLeft">32dp</item>
+        <item name="cornerSizeBottomRight">32dp</item>
+        <item name="cornerSizeTopLeft">32dp</item>
+        <item name="cornerSizeTopRight">32dp</item>
     </style>
 
-    <style name="Theme.ProtectoCrypto.TransparentActivity" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ProtectoCrypto.TransparentActivity" parent="Theme.ProtectoCrypto">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
