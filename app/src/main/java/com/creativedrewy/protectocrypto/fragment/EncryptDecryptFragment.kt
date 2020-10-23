@@ -75,6 +75,12 @@ class EncryptDecryptFragment : Fragment() {
             }
         }
 
+        operation_result_textview.setEndIconOnClickListener {
+            if (operation_result_textview.editText?.text?.isNotEmpty() == true) {
+
+            }
+        }
+
         clear_everything_button.setOnClickListener {
             viewModel.clearEverything()
         }

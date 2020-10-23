@@ -97,6 +97,8 @@
             android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:inputType="textMultiLine"
+            app:endIconDrawable="@drawable/ic_baseline_content_copy_24"
+            app:endIconMode="custom"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/data_input_textview"
             app:layout_constraintTop_toBottomOf="@+id/encrypt_button">
