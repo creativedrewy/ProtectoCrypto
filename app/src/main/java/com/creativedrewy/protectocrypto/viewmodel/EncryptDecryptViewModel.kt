@@ -19,6 +19,10 @@ class EncryptDecryptViewModel @Inject constructor(
     private val clipboardManager: ClipboardManager
 ) : ViewModel() {
 
+    companion object {
+        const val CLIP_LABEL = "ProtectoCrypto"
+    }
+
     val viewState: MutableLiveData<ViewState> by lazy {
         MutableLiveData<ViewState>(DataProcessed())
     }
@@ -64,7 +68,7 @@ class EncryptDecryptViewModel @Inject constructor(
     }
 
     fun copyResultToClipboard(result: String) {
-        val clipData = ClipData.newPlainText("text", result)
+        val clipData = ClipData.newPlainText(CLIP_LABEL, result)
         clipboardManager.setPrimaryClip(clipData)
     }
 
@@ -80,10 +84,11 @@ class EncryptDecryptViewModel @Inject constructor(
     }
 
     /**
-     * TODO: Look into clearing the clipboard as well
+     * Clear the form, cached values and even anything we might have pasted into the clipboard
      */
     fun clearEverything() {
         incomingDataUseCase.clearCachedKey()
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, " "))
 
         viewState.postValue(DataProcessed())
     }
