@@ -2,8 +2,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="-32dp"
     tools:context=".activity.FullScreenAppActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,6 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
+
+        <View
+            android:id="@+id/top_border_view"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:background="#ffff0000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/key_textview"
@@ -113,7 +124,7 @@
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/result_title_textview"
-            app:layout_constraintTop_toBottomOf="@+id/result_title_textview" >
+            app:layout_constraintTop_toBottomOf="@+id/result_title_textview">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -130,7 +141,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
             android:text="Clear all data"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/operation_result_textview" />

@@ -34,6 +34,7 @@
 
     <style name="Theme.ProtectoCrypto.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="shapeAppearanceOverlay">?attr/shapeAppearanceLargeComponent</item>
+        <item name="paddingTopNoTitle">0dp</item>
     </style>
 
     <style name="Theme.ProtectoCrypto.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
@@ -57,8 +58,8 @@
         <item name="cornerFamilyBottomRight">rounded</item>
         <item name="cornerFamilyTopLeft">rounded</item>
         <item name="cornerFamilyTopRight">rounded</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">32dp</item>
+        <item name="cornerSizeBottomRight">32dp</item>
         <item name="cornerSizeTopLeft">32dp</item>
         <item name="cornerSizeTopRight">32dp</item>
     </style>
