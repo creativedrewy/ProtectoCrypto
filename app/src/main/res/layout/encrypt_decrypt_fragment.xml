@@ -33,7 +33,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/top_border_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_border_view">
+            app:layout_constraintTop_toBottomOf="@+id/top_border_view"
+            app:startIconDrawable="@drawable/ic_baseline_key_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -53,7 +54,8 @@
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/key_input_textview"
-            app:layout_constraintTop_toBottomOf="@+id/key_input_textview">
+            app:layout_constraintTop_toBottomOf="@+id/key_input_textview"
+            app:startIconDrawable="@drawable/ic_baseline_text_snippet_24">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -65,20 +67,26 @@
 
         <Button
             android:id="@+id/encrypt_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:text="Encrypt"
             app:layout_constraintEnd_toStartOf="@+id/decrypt_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/decrypt_button" />
 
         <Button
             android:id="@+id/decrypt_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="Decrypt"
-            app:layout_constraintEnd_toEndOf="@+id/data_input_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/encrypt_button"
             app:layout_constraintTop_toBottomOf="@+id/data_input_textview" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -86,7 +94,7 @@
             style="?attr/textInputStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
             android:inputType="textMultiLine"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +104,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Result"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp" />
 
