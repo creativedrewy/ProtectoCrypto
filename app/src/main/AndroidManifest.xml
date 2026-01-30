@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.creativedrewy.protectocrypto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:name=".ProtectoCryptoApplication"
@@ -13,8 +12,8 @@
 
         <activity
             android:name=".activity.FullScreenAppActivity"
-            android:launchMode="singleInstance"
-            android:theme="@style/Theme.ProtectoCrypto.TransparentActivity">
+            android:exported="true"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

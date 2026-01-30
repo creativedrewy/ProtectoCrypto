@@ -64,13 +64,4 @@
         <item name="cornerSizeTopLeft">32dp</item>
         <item name="cornerSizeTopRight">32dp</item>
     </style>
-
-    <style name="Theme.ProtectoCrypto.TransparentActivity" parent="Theme.ProtectoCrypto">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-    </style>
 </resources>

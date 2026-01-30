@@ -3,16 +3,21 @@ package com.creativedrewy.protectocrypto.viewmodel
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.creativedrewy.dataencryption.TextEncryptDecryptUseCase
 import com.creativedrewy.protectocrypto.usecase.IncomingDataUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+@HiltViewModel
 class EncryptDecryptViewModel @Inject constructor(
     private val textEncryptionUseCase: TextEncryptDecryptUseCase,
     private val incomingDataUseCase: IncomingDataUseCase,
@@ -23,73 +28,88 @@ class EncryptDecryptViewModel @Inject constructor(
         const val CLIP_LABEL = "ProtectoCrypto"
     }
 
-    val viewState: MutableLiveData<ViewState> by lazy {
-        MutableLiveData<ViewState>(DataProcessed())
-    }
+    private val _uiState = MutableStateFlow(EncryptDecryptUiState())
+    val uiState: StateFlow<EncryptDecryptUiState> = _uiState.asStateFlow()
 
-    /**
-     *
-     */
     fun handleIncomingData(intent: Intent) {
         val fieldsUpdate = incomingDataUseCase.processIntentForUpdate(intent)
-
-        viewState.postValue(DataProcessed(
-            sourceKey = fieldsUpdate.key,
-            sourceData = fieldsUpdate.data
-        ))
+        _uiState.update { currentState ->
+            currentState.copy(
+                sourceKey = fieldsUpdate.key,
+                sourceData = fieldsUpdate.data
+            )
+        }
     }
 
-    fun encodeData(key: String, data: String) {
+    fun onKeyChanged(key: String) {
+        _uiState.update { it.copy(sourceKey = key) }
+    }
+
+    fun onDataChanged(data: String) {
+        _uiState.update { it.copy(sourceData = data) }
+    }
+
+    fun encodeData() {
+        val currentState = _uiState.value
+        if (currentState.sourceKey.isBlank() || currentState.sourceData.isBlank()) return
+
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.Default) {
-                    textEncryptionUseCase.encryptText(key, data)
+                    textEncryptionUseCase.encryptText(currentState.sourceKey, currentState.sourceData)
                 }
-
-                viewState.postValue(DataProcessed(key, data, result))
+                _uiState.update { it.copy(processingResult = result, errorMessage = null) }
             } catch (e: Exception) {
-                viewState.postValue(ErrorState("Error encrypting your data"))
+                _uiState.update { it.copy(errorMessage = "Error encrypting your data") }
             }
         }
     }
 
-    fun decodeData(key: String, data: String) {
+    fun decodeData() {
+        val currentState = _uiState.value
+        if (currentState.sourceKey.isBlank() || currentState.sourceData.isBlank()) return
+
         viewModelScope.launch {
             try {
                 val result = withContext(Dispatchers.Default) {
-                    textEncryptionUseCase.decryptText(key, data)
+                    textEncryptionUseCase.decryptText(currentState.sourceKey, currentState.sourceData)
                 }
-
-                viewState.postValue(DataProcessed(key, data, result))
+                _uiState.update { it.copy(processingResult = result, errorMessage = null) }
             } catch (e: Exception) {
-                viewState.postValue(ErrorState("Error decrypting your data"))
+                _uiState.update { it.copy(errorMessage = "Error decrypting your data") }
             }
         }
     }
 
-    fun copyResultToClipboard(result: String) {
-        val clipData = ClipData.newPlainText(CLIP_LABEL, result)
-        clipboardManager.setPrimaryClip(clipData)
+    fun copyResultToClipboard(): Boolean {
+        val result = _uiState.value.processingResult
+        if (result.isNotEmpty()) {
+            val clipData = ClipData.newPlainText(CLIP_LABEL, result)
+            clipboardManager.setPrimaryClip(clipData)
+            return true
+        }
+        return false
+    }
+
+    fun clearErrorMessage() {
+        _uiState.update { it.copy(errorMessage = null) }
     }
 
     fun clearCacheIfNeeded() {
-        (viewState.value as? DataProcessed)?.let {
-            if (it.sourceData.isNotEmpty() &&
-                it.sourceKey.isNotEmpty() &&
-                it.processingResult.isNotEmpty()) {
-
-                incomingDataUseCase.clearCachedKey()
-            }
+        val state = _uiState.value
+        if (state.sourceData.isNotEmpty() &&
+            state.sourceKey.isNotEmpty() &&
+            state.processingResult.isNotEmpty()) {
+            incomingDataUseCase.clearCachedKey()
         }
     }
 
     /**
-     * Clear the form, cached values and even anything we might have pasted into the clipboard
+     * Clear the form, cached values and clipboard
      */
     fun clearEverything() {
         incomingDataUseCase.clearCachedKey()
         clipboardManager.setPrimaryClip(ClipData.newPlainText(CLIP_LABEL, " "))
-
-        viewState.postValue(DataProcessed())
+        _uiState.value = EncryptDecryptUiState()
     }
 }

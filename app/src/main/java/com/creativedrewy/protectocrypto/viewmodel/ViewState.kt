@@ -1,13 +1,11 @@
 package com.creativedrewy.protectocrypto.viewmodel
 
-sealed class ViewState
-
-data class DataProcessed(
+/**
+ * UI state for the encrypt/decrypt screen
+ */
+data class EncryptDecryptUiState(
     val sourceKey: String = "",
     val sourceData: String = "",
-    val processingResult: String = ""
-) : ViewState()
-
-data class ErrorState(
-    val message: String = ""
-): ViewState()
+    val processingResult: String = "",
+    val errorMessage: String? = null
+)
